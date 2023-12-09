@@ -8,7 +8,7 @@ CREATE TABLE Zipcodes (
     STATE VARCHAR(2),
     COUNTY VARCHAR(255),
     CTY_FIPS VARCHAR(3),
-    geometry GEOMETRY(POLYGON)
+    wkt_geometry TEXT
 );
 
 -- Table: 311_data
@@ -25,7 +25,7 @@ CREATE TABLE ServiceRequests (
     borough VARCHAR(255),
     latitude FLOAT,
     longitude FLOAT,
-    geometry GEOMETRY(POINT)
+    wkt_geometry TEXT
 );
 
 -- Table: Trees_data
@@ -79,7 +79,7 @@ CREATE TABLE Trees (
     longitude FLOAT,
     x_sp FLOAT,
     y_sp FLOAT,
-    geometry GEOMETRY(POINT)
+    wkt_geometry TEXT
 );
 
 CREATE TABLE RealEstateData_Filtered AS

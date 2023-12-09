@@ -1,0 +1,11 @@
+
+WITH sub_trees AS
+(SELECT zipcode, COUNT(tree_id) AS num_trees
+FROM trees
+GROUP BY zipcode
+ORDER by num_trees DESC
+LIMIT 10)
+
+SELECT regionname, TO_CHAR("2018-08-31"::numeric, 'FM9,999,999,999.99') AS avg_rent
+FROM rents
+JOIN sub_trees ON rents.regionname::text = sub_trees.zipcode::text;

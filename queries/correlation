@@ -1,0 +1,37 @@
+
+WITH sub_trees2 AS
+(SELECT zipcode, COUNT(tree_id) AS num_trees
+FROM trees
+GROUP BY trees.zipcode
+ORDER by num_trees DESC
+),
+complaints2 AS
+(SELECT zipcode, COUNT(unique_key) AS num_complaints
+FROM complaints
+WHERE created_date BETWEEN '2023-09-30T00:00:00' AND '2023-09-30T23:59:59'
+GROUP BY zipcode
+ORDER BY num_complaints DESC
+),
+sorted_rent AS
+((SELECT regionname, TO_CHAR(MAX("2023-09-30")::numeric, 'FM9,999,999,999.99') AS avg_rent
+FROM rents
+GROUP BY regionname
+ORDER BY avg_rent DESC
+LIMIT 5)
+UNION
+(SELECT regionname, TO_CHAR(MAX("2023-09-30")::numeric, 'FM9,999,999,999.99') AS avg_rent
+FROM rents
+GROUP BY regionname
+ORDER BY avg_rent ASC
+LIMIT 5)
+)
+
+SELECT
+    complaints2.zipcode::text AS zipcode,
+    sorted_rent.avg_rent::text,
+    sub_trees2.num_trees::text,
+    complaints2.num_complaints::text
+FROM sorted_rent
+LEFT JOIN complaints2 ON sorted_rent.regionname::integer = complaints2.zipcode::integer
+LEFT JOIN sub_trees2 ON sub_trees2.zipcode::integer = sorted_rent.regionname::integer
+ORDER BY sorted_rent.avg_rent::text;

@@ -1,0 +1,9 @@
+
+SELECT
+    tree_id,
+    spc_common AS species,
+    status,
+    health,
+    wkt_geometry AS coordinate_location
+FROM trees
+WHERE ST_DWithin(wkt_geometry::geography, ST_GeographyFromText('POINT(-73.96253174434912 40.80737875669467)'), 805)

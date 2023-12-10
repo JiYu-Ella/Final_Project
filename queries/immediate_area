@@ -1,6 +1,6 @@
 
 SELECT tree_id,
-       spc_common AS species,
+       species,
        status,
        health,
        wkt_geometry AS coordinate_location

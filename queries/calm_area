@@ -1,6 +1,6 @@
 
 SELECT zipcode, COUNT(unique_key) AS num_complaints
 FROM complaints
-WHERE created_date BETWEEN '2023-09-30T00:00:00' AND '2023-09-30T23:59:59'
+WHERE created_date BETWEEN '2022-10-01T00:00:00' AND '2023-09-30T23:59:59'
 GROUP BY zipcode
 ORDER BY num_complaints DESC;

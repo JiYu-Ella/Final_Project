@@ -1,0 +1,14 @@
+json
+pathlib
+urllib.parse
+matplotlib
+pandas
+seaborn
+requests
+os
+shapely
+sqlalchemy
+folium
+geoalchemy2
+geopandas
+psycopg2
